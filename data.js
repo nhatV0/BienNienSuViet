@@ -1,75 +1,47 @@
-/**
- * BIÊN NIÊN SỬ VIỆT - DỮ LIỆU HỆ THỐNG (NÂNG CẤP)
- * Hướng dẫn: 
- * 1. Thêm nhân vật mới bằng cách copy khối {...} vào cuối mảng.
- * 2. Nội dung chia làm: biography (tiểu sử), activities (quá trình), legacy (giá trị hiện tại).
- * 3. 'period' tự động phân loại vào Tab tương ứng.
- */
-
 window.HISTORICAL_DATA = [
     {
-        id: "hung-vuong",
         name: "Hùng Vương",
-        period: "Sơ Khai",
         year: "2879 TCN - 258 TCN",
-        image: "https://images.unsplash.com/photo-1621252179027-94459d278660?auto=format&fit=crop&q=80&w=800",
-        summary: "Các vị vua khai sinh ra nhà nước Văn Lang, đặt nền móng đầu tiên cho dân tộc.",
-        biography: "Thời đại Hùng Vương khởi đầu với Kinh Dương Vương, sau đó là Lạc Long Quân và Âu Cơ. Con trưởng của Lạc Long Quân lên ngôi lấy hiệu là Hùng Vương, đóng đô ở Phong Châu (Phú Thọ).",
-        activities: "Thiết lập hệ thống hành chính sơ khai với các bộ lạc, dạy dân trồng lúa nước, chế tác đồ đồng (trống đồng Đông Sơn). Xây dựng các phong tục tập quán nền tảng như bánh chưng bánh giầy.",
-        legacy: "Biểu tượng thiêng liêng về nguồn cội 'Con Rồng Cháu Tiên'. Ngày Giỗ Tổ Hùng Vương (10/3 Âm lịch) trở thành ngày lễ quốc gia, thắt chặt khối đại đoàn kết dân tộc.",
-        tags: ["Văn Lang", "Sơ Khai", "Giỗ Tổ"],
-        side: "left"
+        period: "Thời kỳ Hồng Bàng",
+        image: "https://images.unsplash.com/photo-1621066551323-863a3434199c?auto=format&fit=crop&q=80&w=1000",
+        side: "left",
+        // Phần I
+        summary: "Hùng Vương là danh hiệu dùng để chỉ các vị vua cai trị nhà nước Văn Lang - nhà nước đầu tiên của người Việt. Đây là biểu tượng của sự đoàn kết và nguồn gốc 'Con Rồng Cháu Tiên'.",
+        // Phần II
+        biography: "Theo truyền thuyết, Hùng Vương là con trưởng của Lạc Long Quân và Âu Cơ. Sau khi cha mẹ chia 100 người con (50 lên rừng, 50 xuống biển), người con cả lên làm vua, đóng đô ở Phong Châu (Phú Thọ ngày nay).",
+        // Phần III
+        activities: "Trong suốt 18 đời vua Hùng, các ngài đã có công khai phá vùng đất phù sa sông Hồng, dạy dân trồng lúa nước, dệt vải và chăn nuôi. Thời kỳ này cũng hình thành các phong tục đặc trưng như bánh chưng bánh giầy, xăm mình để tránh thủy quái.",
+        // Phần IV
+        legacy: "Ngày nay, tín ngưỡng thờ cúng Hùng Vương đã trở thành Di sản văn hóa phi vật thể của nhân loại. Câu nói của Bác Hồ: 'Các vua Hùng đã có công dựng nước, Bác cháu ta phải cùng nhau giữ lấy nước' là kim chỉ nam cho lòng yêu nước của mọi thế hệ Việt Nam."
     },
     {
-        id: "an-duong-vuong",
         name: "An Dương Vương",
-        period: "Sơ Khai",
         year: "257 TCN - 179 TCN",
-        image: "https://images.unsplash.com/photo-1599707334391-702214420712?auto=format&fit=crop&q=80&w=800",
-        summary: "Vị vua nước Âu Lạc, người xây thành Cổ Loa và sở hữu Nỏ Thần.",
-        biography: "Thục Phán vốn là thủ lĩnh bộ tộc Tây Âu, sau khi đánh bại vua Hùng cuối cùng, ông thống nhất Lạc Việt và Tây Âu thành nước Âu Lạc.",
-        activities: "Xây dựng thành Cổ Loa với kiến trúc xoáy ốc độc đáo, chế tạo nỏ liên châu bắn một lần ra hàng trăm mũi tên, tạo dựng quân đội hùng mạnh để chống giặc ngoại xâm.",
-        legacy: "Di tích thành Cổ Loa là minh chứng cho trình độ quân sự và kỹ thuật xây dựng vượt bậc của người Việt cổ. Bài học về cảnh giác bảo vệ đất nước thông qua truyền thuyết Mỵ Châu - Trọng Thủy.",
-        tags: ["Âu Lạc", "Cổ Loa", "Nỏ Thần"],
-        side: "right"
+        period: "Thời kỳ Âu Lạc",
+        image: "https://images.unsplash.com/photo-1599708153386-62e259ef0904?auto=format&fit=crop&q=80&w=1000",
+        side: "right",
+        // Phần I
+        summary: "Thục Phán An Dương Vương là người đã thống nhất bộ tộc Lạc Việt và Tây Âu, lập ra nhà nước Âu Lạc và xây dựng tòa thành Cổ Loa kiên cố bậc nhất lịch sử cổ đại.",
+        // Phần II
+        biography: "An Dương Vương vốn là người đứng đầu bộ tộc Tây Âu. Sau cuộc kháng chiến chống quân Tần (Trung Quốc) thắng lợi, ông đã thay thế đời vua Hùng cuối cùng để lên ngôi, lấy hiệu là An Dương Vương.",
+        // Phần III
+        activities: "Thành tựu lớn nhất là việc xây dựng thành Cổ Loa với kiến trúc xoáy ốc độc đáo và chế tạo Nỏ Liên Châu (nỏ thần) có thể bắn nhiều mũi tên cùng lúc, giúp đánh bại nhiều đợt xâm lược của Triệu Đà.",
+        // Phần IV
+        legacy: "Câu chuyện về sự thất bại của An Dương Vương do chủ quan khinh địch (truyền thuyết Mỵ Châu - Trọng Thủy) là bài học xương máu về việc giữ gìn bí mật quốc gia và tinh thần cảnh giác trong công cuộc bảo vệ Tổ quốc."
     },
     {
-        id: "hai-ba-trung",
         name: "Hai Bà Trưng",
-        period: "Bắc Thuộc",
-        year: "Năm 40 - 43",
-        image: "https://images.unsplash.com/photo-1585128719715-46776b56a0d1?auto=format&fit=crop&q=80&w=800",
-        summary: "Hai nữ anh hùng phất cờ khởi nghĩa tại Hát Môn chống lại ách đô hộ nhà Đông Hán.",
-        biography: "Trưng Trắc và Trưng Nhị là con gái Lạc tướng Mê Linh. Do căm thù quân xâm lược giết hại chồng (Thi Sách) và áp bức nhân dân, Hai Bà đã phất cờ khởi nghĩa.",
-        activities: "Khởi nghĩa nổ ra tại Hát Môn, nhanh chóng giải phóng 65 thành trì. Trưng Trắc lên ngôi vua, đóng đô ở Mê Linh, giữ vững nền độc lập trong 3 năm trước khi hy sinh anh dũng.",
-        legacy: "Tôn vinh vai trò và sức mạnh của phụ nữ Việt Nam. Khẳng định khát vọng độc lập cháy bỏng của dân tộc ngay từ những thế kỷ đầu Công nguyên.",
-        tags: ["Khởi nghĩa", "Mê Linh", "Phụ nữ Việt"],
-        side: "left"
-    },
-    {
-        id: "ngo-quyen",
-        name: "Ngô Quyền",
-        period: "Độc Lập",
-        year: "Năm 938",
-        image: "https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=80&w=2000",
-        summary: "Vị tổ trung hưng kết thúc 1000 năm Bắc thuộc.",
-        biography: "Quê ở Đường Lâm (Sơn Tây), là con rể của Dương Đình Nghệ. Ông là người tài đức vẹn toàn, được tướng sĩ và nhân dân hết lòng tin phục.",
-        activities: "Lãnh đạo trận thủy chiến lịch sử trên sông Bạch Đằng năm 938, dùng kế cắm cọc nhọn tiêu diệt quân Nam Hán. Lên ngôi vua, thiết lập triều chính tự chủ.",
-        legacy: "Mở ra thời kỳ độc lập, tự chủ lâu dài cho Việt Nam. Trận Bạch Đằng trở thành bài học kinh điển về nghệ thuật quân sự tận dụng địa hình thủy triều.",
-        tags: ["Bạch Đằng", "Độc Lập", "Sử Việt"],
-        side: "left"
-    },
-    {
-        id: "tran-hung-dao",
-        name: "Trần Hưng Đạo",
-        period: "Độc Lập",
-        year: "Thế kỷ XIII",
-        image: "https://images.unsplash.com/photo-1582650625119-3a31f8fa2699?auto=format&fit=crop&q=80&w=800",
-        summary: "Danh tướng kiệt xuất 3 lần đánh bại quân Nguyên Mông.",
-        biography: "Tên thật là Trần Quốc Tuấn, thuộc dòng dõi hoàng tộc nhà Trần. Ông là vị tướng hội tụ đủ Nhân - Nghĩa - Trí - Dũng - Tín.",
-        activities: "Tổng chỉ huy quân đội nhà Trần trong các cuộc kháng chiến chống Nguyên Mông. Soạn thảo 'Hịch tướng sĩ' khích lệ tinh thần quân đội, trực tiếp chỉ huy chiến thắng Bạch Đằng 1288.",
-        legacy: "Tư tưởng 'Khoan thư sức dân làm kế sâu rễ bền gốc'. Ông được nhân dân thờ phụng là Đức Thánh Trần, trở thành linh hồn của lòng yêu nước Việt Nam.",
-        tags: ["Nhà Trần", "Nguyên Mông", "Hịch Tướng Sĩ"],
-        side: "right"
+        year: "14 - 43",
+        period: "Thời kỳ Bắc thuộc lần I",
+        image: "https://images.unsplash.com/photo-1533154683836-84ea7a0bc310?auto=format&fit=crop&q=80&w=1000",
+        side: "left",
+        // Phần I
+        summary: "Trưng Trắc và Trưng Nhị là hai nữ anh hùng đầu tiên trong lịch sử Việt Nam đã phất cờ khởi nghĩa, đánh đuổi quân đô hộ nhà Hán, giành lại độc lập tự chủ cho đất nước.",
+        // Phần II
+        biography: "Hai chị em quê ở Mê Linh (Vĩnh Phúc), là con gái của Lạc tướng. Trưng Trắc kết hôn với Thi Sách - người cũng mang chí lớn chống lại ách cai trị tàn bạo của Thái thú Tô Định.",
+        // Phần III
+        activities: "Năm 40, sau khi Thi Sách bị sát hại, Hai Bà Trưng đã tế cờ khởi nghĩa tại cửa sông Hát. Nghĩa quân nhanh chóng giải phóng 65 thành trì, buộc Tô Định phải cắt tóc thay hình đổi dạng chạy trốn về nước.",
+        // Phần IV
+        legacy: "Cuộc khởi nghĩa chứng minh sức mạnh quật cường của phụ nữ Việt Nam: 'Giặc đến nhà đàn bà cũng đánh'. Tinh thần của Hai Bà là nguồn cảm hứng bất tận cho các phong trào giải phóng dân tộc sau này."
     }
 ];
