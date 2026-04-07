@@ -175,8 +175,6 @@
 
                     <!-- Accordion Info -->
                     <div class="w-full md:w-2/3 space-y-4">
-                        <!-- Dạng 4 mục chính -->
-                        
                         <!-- I. Tóm tắt -->
                         <details class="group bg-white rounded-2xl border border-zinc-200 overflow-hidden shadow-sm" open>
                             <summary class="flex items-center justify-between p-5 cursor-pointer list-none hover:bg-zinc-50 transition-colors">
@@ -241,22 +239,54 @@
             lucide.createIcons();
         }
 
-        // Tự động gắn tooltip khi nhắc tên nhân vật khác
-        function formatLinks(text) {
-            DATA.forEach(person => {
-                const regex = new RegExp(`(?<!["' >])${person.name}(?!["' <])`, 'g');
-                text = text.replace(regex, `
-                    <span class="tooltip-link">
-                        ${person.name}
-                        <span class="tooltip-box">
-                            <strong class="text-amber-500 text-base">${person.name}</strong><br>
-                            <span class="text-[10px] text-zinc-400 uppercase">${person.period} (${person.year})</span><br>
-                            <p class="mt-2 leading-snug font-normal opacity-90 text-white italic">"${person.summary}"</p>
-                        </span>
-                    </span>
-                `);
-            });
-            return text;
+        // Cập nhật hàm formatLinks để không làm hỏng thẻ HTML (như <img>)
+        function formatLinks(htmlContent) {
+            let tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlContent;
+
+            // Hàm đệ quy chỉ xử lý các node văn bản
+            function processNode(node) {
+                if (node.nodeType === 3) { // Text node
+                    let text = node.textContent;
+                    let hasChanged = false;
+
+                    DATA.forEach(person => {
+                        const regex = new RegExp(`(?<!["' >])${person.name}(?!["' <])`, 'g');
+                        if (regex.test(text)) {
+                            hasChanged = true;
+                            text = text.replace(regex, `[[LINK_START]]${person.name}[[LINK_END]]`);
+                        }
+                    });
+
+                    if (hasChanged) {
+                        let span = document.createElement('span');
+                        let finalHtml = text;
+                        
+                        DATA.forEach(person => {
+                            const placeholderStart = `[[LINK_START]]${person.name}[[LINK_END]]`;
+                            const tooltipHtml = `
+                                <span class="tooltip-link">
+                                    ${person.name}
+                                    <span class="tooltip-box">
+                                        <strong class="text-amber-500 text-base">${person.name}</strong><br>
+                                        <span class="text-[10px] text-zinc-400 uppercase">${person.period} (${person.year})</span><br>
+                                        <p class="mt-2 leading-snug font-normal opacity-90 text-white italic">"${person.summary}"</p>
+                                    </span>
+                                </span>`;
+                            finalHtml = finalHtml.split(placeholderStart).join(tooltipHtml);
+                        });
+                        
+                        span.innerHTML = finalHtml;
+                        node.parentNode.replaceChild(span, node);
+                    }
+                } else if (node.nodeType === 1 && node.tagName !== 'SPAN' && node.tagName !== 'IMG') {
+                    // Tiếp tục quét các con nhưng bỏ qua các thẻ đã là tooltip hoặc là ảnh
+                    Array.from(node.childNodes).forEach(processNode);
+                }
+            }
+
+            Array.from(tempDiv.childNodes).forEach(processNode);
+            return tempDiv.innerHTML;
         }
 
         function setupScrollReveal() {
