@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biên Niên Sử Việt - Hành Trình Di Sản</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --deep-red: #8B0000;
+            --ink-black: #1a1a1a;
+            --paper-white: #f4f1ea;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--paper-white);
+            color: var(--ink-black);
+            overflow-x: hidden;
+        }
+
+        h1, h2, .serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Hiệu ứng trượt cho hình ảnh */
+        .reveal {
+            opacity: 0;
+            transition: all 1s ease-out;
+        }
+        .reveal-left { transform: translateX(-100px); }
+        .reveal-right { transform: translateX(100px); }
+        
+        .active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Tooltip style */
+        .tooltip-link {
+            border-bottom: 1px dashed var(--deep-red);
+            cursor: help;
+            position: relative;
+        }
+        
+        .tooltip-box {
+            display: none;
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--ink-black);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            width: 250px;
+            z-index: 50;
+            font-size: 0.8rem;
+        }
+        
+        .tooltip-link:hover .tooltip-box {
+            display: block;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--primary-gold);
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line { left: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="relative h-screen flex items-center justify-center bg-zinc-900 text-white overflow-hidden">
+        <div class="absolute inset-0 opacity-40">
+            <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover" alt="Background Lịch Sử">
+        </div>
+        <div class="relative z-10 text-center px-4">
+            <h1 class="text-6xl md:text-8xl font-bold mb-4 tracking-wider text-amber-500">BIÊN NIÊN SỬ VIỆT</h1>
+            <p class="text-xl md:text-2xl font-light italic opacity-90">"Dân ta phải biết sử ta, cho tường gốc tích nước nhà Việt Nam"</p>
+            <div class="mt-8">
+                <input type="text" id="searchInput" placeholder="Tìm kiếm anh hùng, triều đại..." class="px-6 py-3 rounded-full bg-white/10 border border-white/20 backdrop-blur-md text-white w-full max-w-md focus:outline-none focus:ring-2 focus:ring-amber-500">
+            </div>
+            <div class="mt-20 animate-bounce">
+                <p class="text-sm uppercase tracking-widest">Cuộn để khám phá</p>
+                <span>↓</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 py-20 relative">
+        <div class="timeline-line"></div>
+        
+        <div id="contentWrapper">
+            <!-- Dữ liệu sẽ được render tự động ở đây -->
+        </div>
+    </main>
+
+    <footer class="bg-zinc-900 text-gray-400 py-12 text-center mt-20">
+        <p class="mb-4">© 2024 Dự án Biên Niên Sử Việt - Dành cho thế hệ trẻ</p>
+        <div class="flex justify-center gap-6">
+            <a href="#" class="hover:text-amber-500">Trang chủ</a>
+            <a href="#" class="hover:text-amber-500">Bản đồ</a>
+            <a href="#" class="hover:text-amber-500">Tài liệu</a>
+        </div>
+    </footer>
+
+    <!-- Import Dữ liệu -->
+    <script src="data.js"></script>
+
+    <script>
+        // LOGIC CHÍNH CỦA TRANG WEB
+        const contentWrapper = document.getElementById('contentWrapper');
+        const searchInput = document.getElementById('searchInput');
+
+        // Hàm Render dữ liệu
+        function renderContent(data) {
+            contentWrapper.innerHTML = '';
+            
+            data.forEach((item, index) => {
+                const section = document.createElement('section');
+                section.className = `flex flex-col md:flex-row items-center mb-40 relative z-10 ${item.side === 'right' ? 'md:flex-row-reverse' : ''}`;
+                
+                section.innerHTML = `
+                    <!-- Cột Hình ảnh -->
+                    <div class="w-full md:w-1/2 p-4 md:p-12 reveal reveal-${item.side}">
+                        <div class="relative group">
+                            <img src="${item.image}" alt="${item.name}" class="rounded-lg shadow-2xl grayscale hover:grayscale-0 transition duration-500 w-full aspect-[4/3] object-cover border-4 border-white">
+                            <div class="absolute -bottom-6 -right-6 bg-amber-500 text-white p-4 font-bold rounded-lg shadow-lg">
+                                ${item.year}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cột Nội dung -->
+                    <div class="w-full md:w-1/2 p-8 md:p-12">
+                        <span class="text-amber-600 font-bold uppercase tracking-widest text-sm mb-2 block">${item.period}</span>
+                        <h2 class="text-4xl font-bold mb-6 text-zinc-800">${item.name}</h2>
+                        <p class="text-lg text-gray-600 italic mb-6 leading-relaxed border-l-4 border-amber-500 pl-4">${item.summary}</p>
+                        <p class="text-gray-700 leading-relaxed mb-8">
+                            ${formatDescription(item.description)}
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            ${item.tags.map(tag => `<span class="bg-zinc-200 px-3 py-1 rounded-full text-xs text-gray-600">#${tag}</span>`).join('')}
+                        </div>
+                    </div>
+                `;
+                contentWrapper.appendChild(section);
+            });
+
+            // Sau khi render xong, kích hoạt Observer cho hiệu ứng
+            setupScrollAnimations();
+        }
+
+        // Hàm định dạng mô tả (Ví dụ: tự động tạo link tooltip cho các từ khóa quan trọng)
+        function formatDescription(text) {
+            // Logic đơn giản: Nếu trong bài có tên các nhân vật khác, tự tạo link
+            HISTORICAL_DATA.forEach(person => {
+                const regex = new RegExp(person.name, 'g');
+                if (text.includes(person.name)) {
+                    text = text.replace(regex, `
+                        <span class="tooltip-link">
+                            ${person.name}
+                            <span class="tooltip-box">
+                                <strong>${person.name}</strong><br>
+                                Giai đoạn: ${person.period}<br>
+                                ${person.summary.substring(0, 50)}...
+                            </span>
+                        </span>
+                    `);
+                }
+            });
+            return text;
+        }
+
+        // Xử lý hiệu ứng cuộn trang (Reveal Effect)
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.2
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        }
+
+        // Tính năng tìm kiếm
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = HISTORICAL_DATA.filter(item => 
+                item.name.toLowerCase().includes(term) || 
+                item.period.toLowerCase().includes(term) ||
+                item.tags.some(tag => tag.toLowerCase().includes(term))
+            );
+            renderContent(filtered);
+        });
+
+        // Khởi tạo trang web
+        window.onload = () => {
+            renderContent(HISTORICAL_DATA);
+        };
+    </script>
+</body>
+</html>
