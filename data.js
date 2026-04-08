@@ -16,28 +16,28 @@ window.HISTORICAL_DATA = [
                 <img src="https://images.unsplash.com/photo-1599707334391-702214420712?auto=format&fit=crop&q=80&w=800" class="w-full rounded-lg my-4 shadow-md" alt="Lễ hội Đền Hùng">
                 Câu nói của Bác Hồ: 'Các vua Hùng đã có công dựng nước, Bác cháu ta phải cùng nhau giữ lấy nước' là kim chỉ nam cho lòng yêu nước của mọi thế hệ Việt Nam.`
     },
-        {
-      name: "Thục Phán – An Dương Vương",
-      year: "Thế kỉ III TCN – khoảng 179 TCN",
-      period: "Thời kỳ Âu Lạc",
-      image: "image/AnDuongVuong.jpg",
-      side: "left",
-    
-      summary:
-        "An Dương Vương (Thục Phán) là vị vua sáng lập nước Âu Lạc, nổi bật với việc xây thành Cổ Loa và chế tạo nỏ thần. Ông để lại bài học lịch sử sâu sắc về sự cảnh giác trong bảo vệ đất nước qua câu chuyện Mỵ Châu – Trọng Thủy.",
-    
-      biography:
-        "Tên thật là Thục Phán, ông được tôn xưng là An Dương Vương sau khi lên ngôi. Xuất thân là thủ lĩnh người Âu Việt, sống ở vùng núi phía Bắc (nay thuộc Bắc Bộ Việt Nam), vào khoảng thế kỉ III TCN. Ông đã thống nhất hai bộ tộc Âu Việt và Lạc Việt, thành lập nước Âu Lạc – một bước ngoặt lớn trong lịch sử dân tộc. Triều đại của ông kết thúc khoảng năm 179 TCN khi Âu Lạc thất bại trước Nam Việt của Triệu Đà.",
-    
-      activities:
-        "An Dương Vương có ba đóng góp nổi bật trong quá trình trị vì:\n\n" +
-        "Về xây dựng đất nước: Ông hợp nhất các bộ tộc Âu Việt và Lạc Việt để lập nước Âu Lạc, dời đô về Cổ Loa và cho xây thành Cổ Loa với kiến trúc xoáy ốc độc đáo, quy mô lớn – một công trình phòng thủ tiêu biểu của thời đại.\n\n" +
-        "Về phát triển quân sự: Ông chủ trương chế tạo nỏ thần – vũ khí lợi hại bậc nhất thời bấy giờ – và xây dựng đội quân hùng mạnh, đủ sức chống lại các thế lực ngoại xâm.\n\n" +
-        "Về chống ngoại xâm: Ban đầu ông nhiều lần đánh bại quân xâm lược của Triệu Đà. Tuy nhiên, về sau do mất cảnh giác, bí mật quân sự bị lộ qua câu chuyện Mỵ Châu – Trọng Thủy, khiến Âu Lạc rơi vào tay Triệu Đà.",
-    
-      legacy:
-        "Giá trị lớn nhất An Dương Vương để lại là bài học về sự kết hợp giữa xây dựng và bảo vệ đất nước. Ông cho thấy muốn phát triển bền vững cần có nền tảng vững chắc từ đoàn kết dân tộc, tổ chức quốc gia và sức mạnh quốc phòng.\n\nĐồng thời, thất bại của ông trước Triệu Đà cũng là lời nhắc nhở xuyên thời đại: dù trong thời kỳ hội nhập hay phát triển, không được chủ quan hay mất cảnh giác trước những âm mưu bên ngoài. Người lãnh đạo phải luôn đề cao trách nhiệm với vận mệnh dân tộc, giữ vững bản lĩnh và bảo vệ lợi ích quốc gia lên trên hết.\n\n[Ảnh sẽ ở đây]",
-},
+    {
+          name: "Thục Phán – An Dương Vương",
+          year: "Thế kỉ III TCN – khoảng 179 TCN",
+          period: "Thời kỳ Âu Lạc",
+          image: "image/AnDuongVuong.jpg",
+          side: "left",
+        
+          summary:
+            "An Dương Vương (Thục Phán) là vị vua sáng lập nước Âu Lạc, nổi bật với việc xây thành Cổ Loa và chế tạo nỏ thần. Ông để lại bài học lịch sử sâu sắc về sự cảnh giác trong bảo vệ đất nước qua câu chuyện Mỵ Châu – Trọng Thủy.",
+        
+          biography:
+            "Tên thật là Thục Phán, ông được tôn xưng là An Dương Vương sau khi lên ngôi. Xuất thân là thủ lĩnh người Âu Việt, sống ở vùng núi phía Bắc (nay thuộc Bắc Bộ Việt Nam), vào khoảng thế kỉ III TCN. Ông đã thống nhất hai bộ tộc Âu Việt và Lạc Việt, thành lập nước Âu Lạc – một bước ngoặt lớn trong lịch sử dân tộc. Triều đại của ông kết thúc khoảng năm 179 TCN khi Âu Lạc thất bại trước Nam Việt của Triệu Đà.",
+        
+          activities:
+            "An Dương Vương có ba đóng góp nổi bật trong quá trình trị vì:\n\n" +
+            "Về xây dựng đất nước: Ông hợp nhất các bộ tộc Âu Việt và Lạc Việt để lập nước Âu Lạc, dời đô về Cổ Loa và cho xây thành Cổ Loa với kiến trúc xoáy ốc độc đáo, quy mô lớn – một công trình phòng thủ tiêu biểu của thời đại.\n\n" +
+            "Về phát triển quân sự: Ông chủ trương chế tạo nỏ thần – vũ khí lợi hại bậc nhất thời bấy giờ – và xây dựng đội quân hùng mạnh, đủ sức chống lại các thế lực ngoại xâm.\n\n" +
+            "Về chống ngoại xâm: Ban đầu ông nhiều lần đánh bại quân xâm lược của Triệu Đà. Tuy nhiên, về sau do mất cảnh giác, bí mật quân sự bị lộ qua câu chuyện Mỵ Châu – Trọng Thủy, khiến Âu Lạc rơi vào tay Triệu Đà.",
+        
+          legacy:
+            "Giá trị lớn nhất An Dương Vương để lại là bài học về sự kết hợp giữa xây dựng và bảo vệ đất nước. Ông cho thấy muốn phát triển bền vững cần có nền tảng vững chắc từ đoàn kết dân tộc, tổ chức quốc gia và sức mạnh quốc phòng.\n\nĐồng thời, thất bại của ông trước Triệu Đà cũng là lời nhắc nhở xuyên thời đại: dù trong thời kỳ hội nhập hay phát triển, không được chủ quan hay mất cảnh giác trước những âm mưu bên ngoài. Người lãnh đạo phải luôn đề cao trách nhiệm với vận mệnh dân tộc, giữ vững bản lĩnh và bảo vệ lợi ích quốc gia lên trên hết.\n\n[Ảnh sẽ ở đây]",
+    },
     {
       name: "Hai Bà Trưng",
       year: "14 - 43",
