@@ -39,5 +39,5 @@ window.HISTORICAL_DATA = [
       legacy: `Cuộc khởi nghĩa của Hai Bà Trưng là cuộc nổi dậy đầu tiên trong lịch sử Việt Nam do phụ nữ lãnh đạo và giành thắng lợi — một kỳ tích hiếm có trên thế giới thời bấy giờ. Sự kiện này không chỉ khẳng định chủ quyền dân tộc mà còn tạo tiền đề, cổ vũ mạnh mẽ cho hàng loạt phong trào đấu tranh giành độc lập về sau như khởi nghĩa Bà Triệu, Lý Bí, Triệu Quang Phục...
     <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?auto=format&fit=crop&q=80&w=800" class="w-full rounded-lg my-4 shadow-md" alt="Đền thờ Hai Bà Trưng">
     Ngày nay, hình tượng Hai Bà được thờ phụng tại hàng trăm đền thờ trên khắp cả nước, trở thành biểu tượng bất diệt của tinh thần yêu nước, bình đẳng giới và ý chí quật cường. Thế hệ trẻ Việt Nam học từ Hai Bà bài học về lý tưởng sống, bản lĩnh dân tộc và trách nhiệm thiêng liêng với Tổ quốc.`
-    },
+    }
 ];
