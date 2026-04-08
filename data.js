@@ -20,7 +20,7 @@ window.HISTORICAL_DATA = [
       name: "Thục Phán – An Dương Vương",
       year: "Thế kỉ III TCN – khoảng 179 TCN",
       period: "Thời kỳ Âu Lạc",
-      image: "[Ảnh sẽ ở đây]",
+      image: "image/AnDuongVuong.jpg",
       side: "left",
     
       summary:
