@@ -1,5 +1,16 @@
 window.HISTORICAL_DATA = [
     {
+  name: "Kinh Dương Vương",
+  year: "2879 TCN",
+  period: "Thời kỳ Hồng Bàng",
+  image: "",
+  side: "left",
+  summary: "Kinh Dương Vương (tên thật Lộc Tục) là thủy tổ đầu tiên của dân tộc Việt, người sáng lập nước Xích Quỷ – nhà nước sơ khai của người Việt cổ.",
+  biography: "Kinh Dương Vương là thủy tổ của người Việt, tên thật Lộc Tục, con Đế Minh. Ông được giao cai quản phương Nam và lập nên nước Xích Quỷ – nhà nước sơ khai đầu tiên, đặt nền móng cho dân tộc. Ông kết duyên với Long Nữ, sinh ra Lạc Long Quân, mở đầu dòng dõi các vua Hùng. Dù mang tính truyền thuyết, hình tượng này khẳng định nguồn gốc lâu đời và sự hình thành sớm của dân tộc Việt Nam.",
+  activities: "Kinh Dương Vương là người mở đầu lịch sử dân tộc theo truyền thuyết, con Đế Minh, được giao cai quản phương Nam. Ông lập nước Xích Quỷ – nhà nước sơ khai đầu tiên, gắn kết các bộ lạc và phát triển đời sống cư dân. Ông là cha của Lạc Long Quân, đặt nền móng cho dòng dõi các vua Hùng. Hình tượng này thể hiện giai đoạn hình thành quốc gia và ý thức nguồn gốc chung của dân tộc Việt.",
+  legacy: "Ông mang giá trị hiện tại ở việc củng cố ý thức cội nguồn, nuôi dưỡng tinh thần đoàn kết dân tộc; thể hiện khát vọng xây dựng quốc gia có chủ quyền; đồng thời khơi dậy niềm tự hào, trách nhiệm gìn giữ bản sắc và phát triển đất nước bền vững trong thời đại hội nhập.",
+},
+    {
         name: "Hùng Vương",
         year: "2879 TCN - 258 TCN",
         period: "Thời kỳ Hồng Bàng",
