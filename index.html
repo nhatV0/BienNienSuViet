@@ -108,27 +108,38 @@
         /* ─── TABS (FIXED SCROLL) ─── */
         .tab-nav-container {
             width: 100%;
+            max-width: 100vw;
             overflow: hidden;
             margin-top: 1rem;
+            position: relative;
         }
 
         .tab-nav {
             display: flex;
             gap: 0.6rem;
-            padding: 0.5rem 1rem;
-            overflow-x: auto;
-            /* Quan trọng: Để scroll hoạt động tự nhiên */
+            padding: 0.5rem 1.5rem;
+            overflow-x: auto; /* Cho phép kéo ngang */
             justify-content: flex-start; 
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Ẩn scrollbar trên Firefox */
+            -webkit-overflow-scrolling: touch; /* Vuốt mượt trên iOS */
         }
 
-        /* Căn giữa nếu nội dung ít, nhưng vẫn cho phép scroll nếu nội dung nhiều */
+        /* Hiệu ứng mờ ở 2 đầu để báo hiệu còn kéo được */
+        .tab-nav-container::after {
+            content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0;
+            width: 40px;
+            background: linear-gradient(to left, rgba(24,24,27,0.8), transparent);
+            pointer-events: none;
+        }
+
         @media (min-width: 768px) {
             .tab-nav { justify-content: center; }
+            .tab-nav-container::after { display: none; }
         }
 
-        .tab-nav::-webkit-scrollbar { display: none; }
+        .tab-nav::-webkit-scrollbar { display: none; } /* Ẩn scrollbar Chrome/Safari */
 
         .tab-btn {
             white-space: nowrap;
@@ -264,17 +275,19 @@
 
 <script src="data.js"></script>
 <script>
-    // 1. Dữ liệu và Config
+    // Tối ưu hóa dữ liệu ngay từ đầu
     const DATA = window.HISTORICAL_DATA || [];
-    let currentTab = "Tất cả";
-    
-    // Tạo Map dữ liệu để truy xuất O(1) thay vì O(N)
     const dataMap = new Map(DATA.map(item => [item.name, item]));
     
-    // 2. TỐI ƯU QUAN TRỌNG: Tạo 1 Regex duy nhất cho tất cả tên nhân vật
-    // Điều này giúp hàm formatLinks chỉ chạy 1 lần quét thay vì lặp lại theo số nhân vật
-    const allNamesPattern = DATA.map(d => d.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
-    const globalNameRegex = new RegExp(`\\b(${allNamesPattern})\\b`, 'g');
+    // Tạo Regex tổng hợp để tìm link nhanh hơn thay vì duyệt từng node
+    const allNames = DATA.map(d => d.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+    const globalNameRegex = new RegExp(`\\b(${allNames})\\b`, 'g');
+
+    let currentTab = "Tất cả";
+
+    const contentSection = document.getElementById('contentSection');
+    const tabNav = document.getElementById('tabNav');
+    const searchInput = document.getElementById('searchInput');
 
     const SECTION_CONFIG = [
         { key: 'summary',    title: 'I. Tóm lược', emoji: '📜', open: true },
@@ -282,10 +295,6 @@
         { key: 'activities', title: 'III. Hoạt động', emoji: '⚔️' },
         { key: 'legacy',     title: 'IV. Di sản', emoji: '❤️' },
     ];
-
-    const contentSection = document.getElementById('contentSection');
-    const tabNav = document.getElementById('tabNav');
-    const searchInput = document.getElementById('searchInput');
 
     function initApp() {
         const periods = ["Tất cả", ...new Set(DATA.map(d => d.period))];
@@ -305,7 +314,6 @@
         renderContent();
     }
 
-    // 3. Render hiệu năng cao
     function renderContent() {
         const q = searchInput.value.toLowerCase().trim();
         const filtered = DATA.filter(item => {
@@ -316,16 +324,13 @@
             return matchTab && matchSearch;
         });
 
+        // Tối ưu: Xóa nội dung cũ và dùng Fragment để giảm thiểu giật lag (Reflow)
         contentSection.innerHTML = '';
-        
-        // Sử dụng Fragment để tránh reflow liên tục
         const fragment = document.createDocumentFragment();
 
-        filtered.forEach((item, i) => {
+        filtered.forEach((item) => {
             const card = document.createElement('div');
             card.className = 'char-card';
-            
-            // Build nội dung cơ bản trước
             card.innerHTML = `
                 <div class="profile-wrap">
                     <div class="profile-card">
@@ -361,23 +366,20 @@
         `;
     }
 
-    // 4. Hàm Format tối ưu O(N)
+    // Tối ưu hàm tạo Link: Dùng String Replace cực nhanh thay vì DOM Walker
     function formatLinks(text, currentName) {
         if (!text) return '';
-        
-        // Bước 1: Xử lý xuống dòng
+        // Chuyển ký tự xuống dòng
         let processed = text.replace(/\\n/g, '<br>');
-
-        // Bước 2: Dùng Regex duy nhất thay thế toàn bộ tên nhân vật
-        // Tránh replace tên của chính nhân vật đang xem
+        
+        // Dùng Regex tìm tất cả các tên nhân vật có trong DATA
         return processed.replace(globalNameRegex, (match) => {
-            if (match === currentName) return match;
+            if (match === currentName) return match; // Không tạo link cho chính mình
             
             const p = dataMap.get(match);
             if (!p) return match;
 
             const sum = p.summary ? p.summary.substring(0, 80) + '...' : 'Đang cập nhật...';
-            
             return `<span class="tooltip-link">${match}
                 <span class="tooltip-box">
                     <strong>${p.name}</strong><br>
@@ -400,10 +402,11 @@
         document.querySelectorAll('.char-card').forEach(c => observer.observe(c));
     }
 
+    // Debounce search để tránh load liên tục khi đang gõ
     let searchTimeout;
     searchInput.addEventListener('input', () => {
         clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(renderContent, 300); // Debounce để không render liên tục khi gõ
+        searchTimeout = setTimeout(renderContent, 300);
     });
 
     window.onload = initApp;
