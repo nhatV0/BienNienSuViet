@@ -13,9 +13,12 @@
             --red: #8B0000;
             --ink: #1a1a1a;
             --paper: #f4f1ea;
+            --paper-dark: #ede9df;
+            --white: #ffffff;
             --zinc-100: #f4f4f5;
             --zinc-200: #e4e4e7;
             --zinc-400: #a1a1aa;
+            --zinc-500: #71717a;
             --zinc-700: #3f3f46;
             --zinc-800: #27272a;
             --zinc-900: #18181b;
@@ -23,6 +26,7 @@
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Quicksand', sans-serif;
             background-color: var(--paper);
@@ -30,12 +34,12 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
 
-        /* HEADER */
+        /* ─── HEADER ─── */
         header {
             position: relative;
-            min-height: 50vh;
+            min-height: 45vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -43,275 +47,345 @@
             background: var(--zinc-900);
             color: white;
             text-align: center;
+            overflow: hidden;
             padding: 2rem 1rem;
         }
 
         .header-bg {
             position: absolute;
             inset: 0;
-            background: url('https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=80&w=2000') center/cover;
-            opacity: 0.3;
+            background-image: url('https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.35;
         }
 
-        .header-content { position: relative; z-index: 10; width: 100%; max-width: 800px; }
+        .header-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(24,24,27,0.3) 0%, rgba(24,24,27,0.7) 100%);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 800px;
+            animation: fadeUp 0.8s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
 
         .header-title {
             font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 700;
             color: var(--gold);
             text-transform: uppercase;
             margin-bottom: 0.5rem;
         }
 
-        /* SEARCH */
+        /* ─── SEARCH ─── */
         .search-wrap {
             position: relative;
-            max-width: 500px;
+            max-width: 520px;
             margin: 1.5rem auto;
         }
 
         .search-wrap input {
             width: 100%;
-            padding: 1rem 1.5rem;
-            border-radius: 50px;
+            padding: 0.9rem 3rem 0.9rem 1.2rem;
+            border-radius: 0.75rem;
             border: none;
-            font-size: 1rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            background: white;
+            font-family: inherit;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             outline: none;
         }
 
-        /* TAB NAVIGATION - FIXED SCROLLING */
-        .tab-container {
+        /* ─── TABS (FIXED SCROLL) ─── */
+        .tab-nav-container {
             width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
+            overflow: hidden;
+            margin-top: 1rem;
         }
 
         .tab-nav {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.6rem;
+            padding: 0.5rem 1rem;
             overflow-x: auto;
-            padding: 10px 0;
-            scrollbar-width: none; /* Firefox */
-            -webkit-overflow-scrolling: touch; /* iOS smooth scroll */
-            white-space: nowrap;
-            cursor: grab;
+            /* Quan trọng: Để scroll hoạt động tự nhiên */
+            justify-content: flex-start; 
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Căn giữa nếu nội dung ít, nhưng vẫn cho phép scroll nếu nội dung nhiều */
+        @media (min-width: 768px) {
+            .tab-nav { justify-content: center; }
         }
 
         .tab-nav::-webkit-scrollbar { display: none; }
 
         .tab-btn {
-            flex: 0 0 auto; /* Ngăn chặn co lại */
-            padding: 0.6rem 1.2rem;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.2);
+            white-space: nowrap;
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            border: none;
             background: rgba(255,255,255,0.1);
             color: rgba(255,255,255,0.7);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            flex-shrink: 0;
         }
 
         .tab-btn.active-tab {
             background: var(--gold);
             color: var(--zinc-900);
-            border-color: var(--gold);
         }
 
-        /* CARDS */
-        main { max-width: 1000px; margin: 0 auto; padding: 2rem 1rem; }
-        .char-grid { display: flex; flex-direction: column; gap: 4rem; }
+        /* ─── MAIN ─── */
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        #contentSection { display: flex; flex-direction: column; gap: 4rem; }
 
         .char-card {
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
             opacity: 0;
-            transform: translateY(20px);
-            transition: 0.6s all ease-out;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
         }
 
         .char-card.visible { opacity: 1; transform: translateY(0); }
 
         @media (min-width: 768px) {
-            .char-card { grid-template-columns: 300px 1fr; }
+            .char-card { grid-template-columns: 320px 1fr; }
         }
 
         .profile-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 1.25rem;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             position: sticky;
-            top: 20px;
+            top: 2rem;
+            height: fit-content;
         }
 
-        .profile-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; }
+        .profile-img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
+
         .profile-info { padding: 1.5rem; text-align: center; }
 
-        .accordions { display: flex; flex-direction: column; gap: 0.8rem; }
-        details { background: white; border-radius: 10px; border: 1px solid var(--zinc-200); }
-        summary { padding: 1rem; cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; align-items: center; }
-        .acc-body { padding: 0 1rem 1.5rem; line-height: 1.7; color: var(--zinc-700); text-align: justify; }
-
-        /* TOOLTIP LIGHTWEIGHT */
-        .tooltip-link {
-            color: var(--red);
-            font-weight: 700;
-            border-bottom: 1px dashed var(--gold);
-            text-decoration: none;
+        /* ─── ACCORDIONS ─── */
+        .accordions { display: flex; flex-direction: column; gap: 0.75rem; }
+        details {
+            background: white;
+            border-radius: 0.75rem;
+            border: 1px solid var(--zinc-200);
+        }
+        summary {
+            padding: 1rem;
             cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .acc-body {
+            padding: 1rem;
+            border-top: 1px solid var(--zinc-100);
+            line-height: 1.8;
+            font-size: 0.95rem;
         }
 
-        /* LOADING INDICATOR */
-        #loader { text-align: center; padding: 2rem; display: none; }
+        /* TOOLTIP */
+        .tooltip-link {
+            color: var(--red);
+            font-weight: 600;
+            border-bottom: 1.5px dashed var(--gold);
+            cursor: help;
+            position: relative;
+        }
+
+        .tooltip-box {
+            visibility: hidden;
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #18181b;
+            color: white;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            width: 220px;
+            z-index: 100;
+            font-size: 0.8rem;
+            line-height: 1.4;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+        .tooltip-link:hover .tooltip-box { visibility: visible; }
     </style>
 </head>
 <body>
 
 <header>
     <div class="header-bg"></div>
+    <div class="header-overlay"></div>
     <div class="header-content">
         <h1 class="header-title">Biên Niên Sử Việt</h1>
         <div class="search-wrap">
-            <input type="text" id="searchInput" placeholder="Tìm tên anh hùng hoặc thời kỳ...">
+            <input type="text" id="searchInput" placeholder="Tìm tên anh hùng hoặc thời kỳ..." autocomplete="off">
         </div>
-        <div class="tab-container">
+        <div class="tab-nav-container">
             <nav class="tab-nav" id="tabNav"></nav>
         </div>
     </div>
 </header>
 
 <main>
-    <div id="charGrid" class="char-grid"></div>
-    <div id="loader">Đang tải thêm...</div>
+    <div id="contentSection"></div>
 </main>
 
+<script src="data.js"></script>
 <script>
-    // --- DỮ LIỆU MẪU (Thay thế bằng file data.js của bạn) ---
-    const DATA = [
-        {
-            name: "Lạc Long Quân",
-            period: "Hồng Bàng",
-            year: "Kỷ Hồng Bàng",
-            image: "https://images.unsplash.com/photo-1621066551323-863a3434199c?w=400",
-            summary: "Cha đẻ của dân tộc Việt, người lãnh đạo bộ tộc Lạc Việt.",
-            biography: "Tên thật là Sùng Lãm, con trai của Kinh Dương Vương.",
-            activities: "Dạy dân cách trồng trọt, ăn ở và đánh đuổi giặc ngoại xâm.",
-            legacy: "Truyền thuyết Con Rồng Cháu Tiên là biểu tượng của tinh thần đoàn kết."
-        },
-        {
-            name: "Ngô Quyền",
-            period: "Nhà Ngô",
-            year: "898 – 944",
-            image: "https://images.unsplash.com/photo-1599508704512-2f19efd1e35f?w=400",
-            summary: "Vị vua sáng lập nhà Ngô, nổi tiếng với trận Bạch Đằng năm 938.",
-            biography: "Sinh ra tại Đường Lâm, là con rể của Dương Đình Nghệ.",
-            activities: "Đánh tan quân Nam Hán trên sông Bạch Đằng bằng cọc nhọn.",
-            legacy: "Kết thúc 1000 năm bắc thuộc, mở ra thời kỳ độc lập tự chủ."
-        }
-        // Thêm hàng trăm nhân vật khác vào đây vẫn sẽ chạy mượt
+    // 1. Dữ liệu và Config
+    const DATA = window.HISTORICAL_DATA || [];
+    let currentTab = "Tất cả";
+    
+    // Tạo Map dữ liệu để truy xuất O(1) thay vì O(N)
+    const dataMap = new Map(DATA.map(item => [item.name, item]));
+    
+    // 2. TỐI ƯU QUAN TRỌNG: Tạo 1 Regex duy nhất cho tất cả tên nhân vật
+    // Điều này giúp hàm formatLinks chỉ chạy 1 lần quét thay vì lặp lại theo số nhân vật
+    const allNamesPattern = DATA.map(d => d.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+    const globalNameRegex = new RegExp(`\\b(${allNamesPattern})\\b`, 'g');
+
+    const SECTION_CONFIG = [
+        { key: 'summary',    title: 'I. Tóm lược', emoji: '📜', open: true },
+        { key: 'biography',  title: 'II. Tiểu sử', emoji: '👤' },
+        { key: 'activities', title: 'III. Hoạt động', emoji: '⚔️' },
+        { key: 'legacy',     title: 'IV. Di sản', emoji: '❤️' },
     ];
 
-    // --- CẤU HÌNH ---
-    let currentTab = "Tất cả";
-    let visibleCount = 5; // Chỉ render 5 cái trước để nhanh
-    let filteredData = [];
-    
-    const charGrid = document.getElementById('charGrid');
+    const contentSection = document.getElementById('contentSection');
     const tabNav = document.getElementById('tabNav');
     const searchInput = document.getElementById('searchInput');
 
-    // --- TỐI ƯU HÓA REGEX (CHỈ CHẠY 1 LẦN) ---
-    // Tạo 1 regex duy nhất chứa tất cả tên nhân vật để search nhanh
-    const nameMap = new Map(DATA.map(d => [d.name, d]));
-    const allNamesRegex = new RegExp(`(${DATA.map(d => d.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`, 'g');
-
     function initApp() {
-        // Init Tabs
         const periods = ["Tất cả", ...new Set(DATA.map(d => d.period))];
-        tabNav.innerHTML = periods.map(p => 
-            `<button class="tab-btn ${p === currentTab ? 'active-tab' : ''}" onclick="changeTab('${p}')">${p}</button>`
-        ).join('');
-
-        // Khởi tạo kéo bằng chuột cho thanh tab
-        initTabDrag();
-        
-        filterData();
-    }
-
-    function changeTab(period) {
-        currentTab = period;
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.classList.toggle('active-tab', btn.textContent === period);
+        tabNav.innerHTML = '';
+        periods.forEach(p => {
+            const btn = document.createElement('button');
+            btn.className = 'tab-btn' + (p === currentTab ? ' active-tab' : '');
+            btn.textContent = p;
+            btn.onclick = () => { 
+                currentTab = p; 
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active-tab'));
+                btn.classList.add('active-tab');
+                renderContent();
+            };
+            tabNav.appendChild(btn);
         });
-        filterData();
+        renderContent();
     }
 
-    // Debounce tìm kiếm để không bị lag khi gõ
-    let searchTimeout;
-    searchInput.addEventListener('input', () => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(filterData, 300);
-    });
-
-    function filterData() {
-        const q = searchInput.value.toLowerCase();
-        filteredData = DATA.filter(item => {
+    // 3. Render hiệu năng cao
+    function renderContent() {
+        const q = searchInput.value.toLowerCase().trim();
+        const filtered = DATA.filter(item => {
             const matchTab = currentTab === "Tất cả" || item.period === currentTab;
-            const matchSearch = !q || item.name.toLowerCase().includes(q) || item.period.toLowerCase().includes(q);
+            const matchSearch = !q || 
+                item.name.toLowerCase().includes(q) || 
+                item.period.toLowerCase().includes(q);
             return matchTab && matchSearch;
         });
 
-        visibleCount = 5; // Reset số lượng hiển thị
-        renderGrid();
-    }
-
-    function renderGrid() {
-        const toShow = filteredData.slice(0, visibleCount);
+        contentSection.innerHTML = '';
         
-        if (toShow.length === 0) {
-            charGrid.innerHTML = `<div style="text-align:center; padding: 3rem; color: #666;">Không tìm thấy nhân vật nào.</div>`;
-            return;
-        }
+        // Sử dụng Fragment để tránh reflow liên tục
+        const fragment = document.createDocumentFragment();
 
-        charGrid.innerHTML = toShow.map((item, index) => `
-            <div class="char-card" id="card-${index}">
+        filtered.forEach((item, i) => {
+            const card = document.createElement('div');
+            card.className = 'char-card';
+            
+            // Build nội dung cơ bản trước
+            card.innerHTML = `
                 <div class="profile-wrap">
                     <div class="profile-card">
-                        <img src="${item.image}" alt="${item.name}" class="profile-img" loading="lazy">
+                        <img src="${item.image}" class="profile-img" loading="lazy" onerror="this.src='https://placehold.co/400x500?text=Lịch+Sử+Việt'">
                         <div class="profile-info">
-                            <h2>${item.name}</h2>
-                            <p style="color:var(--gold); font-weight:700; font-size:0.9rem;">${item.year}</p>
-                            <p style="font-size:0.8rem; margin-top:5px; opacity:0.7">${item.period}</p>
+                            <h2 class="serif">${item.name}</h2>
+                            <p style="color:var(--gold); font-weight:700; margin: 0.5rem 0;">${item.year}</p>
+                            <span style="font-size:0.7rem; background:var(--gold-dim); padding:0.2rem 0.6rem; border-radius:1rem;">${item.period}</span>
                         </div>
                     </div>
                 </div>
                 <div class="accordions">
-                    ${renderAccordion("Tóm lược", item.summary, true)}
-                    ${renderAccordion("Tiểu sử", item.biography)}
-                    ${renderAccordion("Sự nghiệp", item.activities)}
-                    ${renderAccordion("Di sản", item.legacy)}
+                    ${SECTION_CONFIG.map(s => buildAccordion(s, item[s.key], item.name)).join('')}
                 </div>
-            </div>
-        `).join('');
+            `;
+            fragment.appendChild(card);
+        });
 
-        // Quan trọng: Chỉ thực hiện replace Link sau khi đã render xong DOM
-        // và sử dụng Intersection Observer để chỉ hiển thị card khi scroll tới
+        contentSection.appendChild(fragment);
         setupReveal();
     }
 
-    function renderAccordion(title, content, open = false) {
+    function buildAccordion(cfg, content, currentName) {
         if (!content) return '';
-        // Tối ưu: Chỉ format link khi người dùng mở chi tiết hoặc dùng hàm tối ưu hơn
-        const safeContent = content.replace(allNamesRegex, `<span class="tooltip-link">$1</span>`);
         return `
-            <details ${open ? 'open' : ''}>
-                <summary>${title} <span>▼</span></summary>
-                <div class="acc-body">${safeContent}</div>
+            <details ${cfg.open ? 'open' : ''}>
+                <summary>
+                    <span>${cfg.emoji} ${cfg.title}</span>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m6 9 12 0-6 6z"/></svg>
+                </summary>
+                <div class="acc-body">${formatLinks(content, currentName)}</div>
             </details>
         `;
+    }
+
+    // 4. Hàm Format tối ưu O(N)
+    function formatLinks(text, currentName) {
+        if (!text) return '';
+        
+        // Bước 1: Xử lý xuống dòng
+        let processed = text.replace(/\\n/g, '<br>');
+
+        // Bước 2: Dùng Regex duy nhất thay thế toàn bộ tên nhân vật
+        // Tránh replace tên của chính nhân vật đang xem
+        return processed.replace(globalNameRegex, (match) => {
+            if (match === currentName) return match;
+            
+            const p = dataMap.get(match);
+            if (!p) return match;
+
+            const sum = p.summary ? p.summary.substring(0, 80) + '...' : 'Đang cập nhật...';
+            
+            return `<span class="tooltip-link">${match}
+                <span class="tooltip-box">
+                    <strong>${p.name}</strong><br>
+                    <small>${p.period}</small><br>
+                    <p style="font-size:0.7rem; margin-top:0.3rem; opacity:0.8">${sum}</p>
+                </span>
+            </span>`;
+        });
     }
 
     function setupReveal() {
@@ -323,44 +397,13 @@
                 }
             });
         }, { threshold: 0.1 });
-
-        document.querySelectorAll('.char-card').forEach(card => observer.observe(card));
+        document.querySelectorAll('.char-card').forEach(c => observer.observe(c));
     }
 
-    // Xử lý kéo thanh Tab bằng chuột (cho Desktop)
-    function initTabDrag() {
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        tabNav.addEventListener('mousedown', (e) => {
-            isDown = true;
-            tabNav.style.cursor = 'grabbing';
-            startX = e.pageX - tabNav.offsetLeft;
-            scrollLeft = tabNav.scrollLeft;
-        });
-        tabNav.addEventListener('mouseleave', () => { isDown = false; });
-        tabNav.addEventListener('mouseup', () => { 
-            isDown = false; 
-            tabNav.style.cursor = 'grab';
-        });
-        tabNav.addEventListener('mousemove', (e) => {
-            if(!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - tabNav.offsetLeft;
-            const walk = (x - startX) * 2;
-            tabNav.scrollLeft = scrollLeft - walk;
-        });
-    }
-
-    // Lazy load thêm khi cuộn trang
-    window.addEventListener('scroll', () => {
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
-            if (visibleCount < filteredData.length) {
-                visibleCount += 5;
-                renderGrid();
-            }
-        }
+    let searchTimeout;
+    searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(renderContent, 300); // Debounce để không render liên tục khi gõ
     });
 
     window.onload = initApp;
